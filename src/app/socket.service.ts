@@ -35,7 +35,7 @@ export class SocketService {
 
 
   public verifyUser(authToken) {
-    console.log("verifying user....")
+    // console.log("verifying user....")
     return Observable.create((observer) => {
       this.socket.on('verify-user', (data) => {
 

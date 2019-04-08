@@ -3,5 +3,5 @@ export interface UserData {
   lastName: string,
   email: string,
   password: string,
-  mobileNumber: number
+  mobileNumber?: number
 }

@@ -21,13 +21,9 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    // console.log(form.value);
     this.userService.loginUser(form.value.email, form.value.password);
   }
 
-  // onGoogleLogin() {
-  //   this.userService.googleLogin();
-  // }
 
   socialSignIn() {
     let socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;

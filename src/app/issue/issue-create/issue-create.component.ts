@@ -35,7 +35,6 @@ export class IssueCreateComponent implements OnInit {
       }),
       description: new FormControl(null, { validators: [Validators.required, Validators.minLength(5)] }),
       status: new FormControl(null, { validators: [Validators.required] }),
-      // assignedTo: new FormControl(null, { validators: [Validators.required] }),
       image: new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] })
     });
 
@@ -52,7 +51,6 @@ export class IssueCreateComponent implements OnInit {
               title: this.issueToEdit.title,
               description: this.issueToEdit.description,
               status: this.issueToEdit.status,
-              // assignedTo: this.issueToEdit.assignedToId,
               image: this.issueToEdit.imagePath
             });
           }, (error) => {
@@ -88,15 +86,12 @@ export class IssueCreateComponent implements OnInit {
 
 
   onSaveIssue() {
-    // console.log(this.form.value);
     if (this.form.invalid) {
       return;
     }
     if (this.mode === 'create') {
-      // console.log(this.form.value);
       this.issueService.createIssue(this.form.value.title, this.form.value.description, this.form.value.status, this.form.value.image);
     } else {
-      // console.log(this.form.value);
       this.issueService.updateIssue(this.issueId, this.form.value.title, this.form.value.description, this.form.value.status, this.form.value.image);
     }
   }

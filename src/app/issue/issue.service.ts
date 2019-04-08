@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
-import { Issue } from './issue.model';
 import { ResponseData } from './../responseData.model';
 import { Router } from '@angular/router';
 import { SocketService } from './../socket.service';
@@ -87,13 +86,10 @@ export class IssueService {
     issueData.append("description", description);
     issueData.append("status", status);
     issueData.append("image", image, 'image');
-    // issueData.append("assignedTo", assignedTo);
 
-    // console.log(issueData);
 
     this.http.post<ResponseData>(`${this.baseUrl}/create`, issueData)
       .subscribe((response) => {
-        // console.log(response);
         if (this.allIssues === null) {
           let retreivedIssues = [];
           retreivedIssues.push(response.data);
@@ -103,7 +99,6 @@ export class IssueService {
         }
 
         this.issueUpdated.next([...this.allIssues]);
-        // this.appRouter.navigate(['/issue/all']);
 
         this.socketService.generalSnackBar("Your issue has been reported successfully");
 
@@ -125,7 +120,6 @@ export class IssueService {
       newIssue.append('title', title);
       newIssue.append('description', description);
       newIssue.append('status', status);
-      // newIssue.append('assignedTo', assignedTo);
       newIssue.append('image', image, 'image');
     } else {
       newIssue = {
@@ -135,10 +129,8 @@ export class IssueService {
         imagePath: image
       };
     }
-    // console.log(newIssue);
     this.http.put(`${this.baseUrl}/edit/${id}`, newIssue)
       .subscribe((response) => {
-        // console.log(response);
         this.getAllIssue();
         this.socketService.issueUpdated(id);
         this.socketService.generalSnackBar("Your issue has been reported successfully");
@@ -159,7 +151,6 @@ export class IssueService {
 
     this.http.post(`${this.baseUrl}/delete/${issueId}`, data)
       .subscribe((response) => {
-        // console.log(response);
         this.getAllIssue();
 
       }, (error) => {
@@ -172,7 +163,6 @@ export class IssueService {
   getAllIssue() {
     this.http.get<ResponseData>(`${this.baseUrl}/all`)
     .subscribe((response) => {
-      // console.log(response.data);
       this.allIssues = response.data;
       if(this.allIssues) {
         this.issueUpdated.next([...this.allIssues]);
@@ -189,7 +179,6 @@ export class IssueService {
   getAllIssuesAssigned() {
     this.http.get<ResponseData>(`${this.baseUrl}/assignedTo`)
     .subscribe((response) => {
-      console.log(response);
       this.allAssignedIssues = response.data;
       if(this.allAssignedIssues) {
         this.assignedIssuesUpdated.next([...this.allAssignedIssues]);
@@ -207,7 +196,6 @@ export class IssueService {
     this.http.get<ResponseData>(`${this.baseUrl}/comment/all/${issueId}`)
     .subscribe((response) => {
       this.allComments = response.data;
-      // console.log(this.allComments);
       if(this.allComments) {
         this.updatedComment.next([...this.allComments]);
       } else {
@@ -227,8 +215,6 @@ export class IssueService {
 
     this.http.post<ResponseData>(`${this.baseUrl}/comment/create`, commentData)
     .subscribe((response) => {
-      // console.log(response.data);
-      // console.log(this.allComments);
 
       if(this.allComments === null) {
         let retreivedComments = [];

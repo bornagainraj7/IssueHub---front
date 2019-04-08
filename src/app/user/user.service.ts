@@ -182,11 +182,6 @@ export class UserService {
     let loginData = { email: email, password: password };
     this.http.post<ResponseData>(`${this.baseUrl}/login`, loginData)
       .subscribe((response) => {
-        // if(response.data) {
-
-        // } else {
-        //   console.log("error occurred " + response.message);
-        // }
 
         const authToken = response.data.authToken;
         this.authToken = authToken;
@@ -222,7 +217,6 @@ export class UserService {
         }
 
       }, (error) => {
-        // console.log("Error occurred");
         console.log(error);
       });
   }
@@ -274,7 +268,6 @@ export class UserService {
     let authtoken = this.authToken;
     this.http.post(`${this.baseUrl}/logout`, authtoken)
       .subscribe((response) => {
-        // console.log(response);
         this.authToken = null;
         this.isAuthenticated = false;
         this.authStatusListner.next(false);
