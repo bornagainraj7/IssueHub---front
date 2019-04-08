@@ -177,7 +177,7 @@ export class IssueService {
 
 
   getAllIssuesAssigned() {
-    this.http.get<ResponseData>(`${this.baseUrl}/assignedTo`)
+    this.http.get<ResponseData>(`${this.baseUrl}/assignedto`)
     .subscribe((response) => {
       this.allAssignedIssues = response.data;
       if(this.allAssignedIssues) {

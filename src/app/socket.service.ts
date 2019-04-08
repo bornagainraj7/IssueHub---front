@@ -19,7 +19,7 @@ export class SocketService {
   }
 
   public showSnackBar(issueId: string, message: string, action: string) {
-    const snackBarRef = this.snackBar.open(message, action, { duration: 5000, horizontalPosition: 'end', verticalPosition: 'top' });
+    const snackBarRef = this.snackBar.open(message, action, { duration: 4000, horizontalPosition: 'end', verticalPosition: 'top' });
 
     if (action) {
       snackBarRef.onAction().subscribe(() => {
@@ -30,7 +30,7 @@ export class SocketService {
   }
 
   public generalSnackBar(message: string) {
-    this.snackBar.open(message, null, { duration: 5000, horizontalPosition: 'end', verticalPosition: 'top' });
+    this.snackBar.open(message, null, { duration: 3000, horizontalPosition: 'end', verticalPosition: 'top' });
   }
 
 

@@ -8,10 +8,10 @@
   <span class="spacer"></span>
   <nav fxHide.xs>
     <ul>
-      <li>
+      <li *ngIf="userIsAuthenticated">
         <a mat-button routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
       </li>
-      <li>
+      <li *ngIf="userIsAuthenticated">
         <a mat-button routerLink="/issue/all" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">All Issues</a>
       </li>
       <li *ngIf="userIsAuthenticated">
