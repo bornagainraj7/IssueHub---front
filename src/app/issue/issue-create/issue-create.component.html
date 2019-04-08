@@ -1,0 +1,54 @@
+<div class="two-space"></div>
+<section fxLayoutAlign="center center">
+  <mat-card class="form-card" fxFlex.lt-sm="100%" fxFlex.lt-md="75%" fxFlex.lt-xl="50%" fxFlex="40%">
+    <mat-card-title class="text-center">Create Issue</mat-card-title>
+
+    <mat-card-content>
+      <form [formGroup]="form" (submit)="onSaveIssue()">
+        <mat-form-field appearance="outline" hintLabel="Should be atleast 6 characters long">
+          <input type="text" matInput [formControlName]="'title'" placeholder="Title" required>
+          <mat-error>Title has to be atleast 3 characters long</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-select [formControlName]="'status'" placeholder="Status" required>
+            <mat-option *ngFor="let status of issueStatus" [value]="status">
+              {{status}}
+            </mat-option>
+          </mat-select>
+          <mat-error>We need to know the status of the issue</mat-error>
+        </mat-form-field>
+
+        <!-- <mat-form-field>
+          <mat-select [formControlName]="'assignedTo'" placeholder="Assign To" required>
+            <mat-option *ngFor="let user of allUsers" [value]="user.userId">
+              {{ user.fullName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+
+        <editor apiKey="test" [formControlName]="'description'"></editor>
+        <mat-hint>*Description has to be atleast 5 characters long</mat-hint>
+        <br>
+        <br>
+
+        <button type="button" mat-stroked-button class="btn btn-success" (click)="filePicker.click()">Choose Image</button>
+        <input type="file" id="image-input" #filePicker (change)="onImagePicked($event)">
+        <!-- <mat-error>Please share the screenshot of error</mat-error> -->
+        <br>
+        <mat-hint align="start">*Please select a screenshot for the issue</mat-hint>
+
+        <div class="image-preview" *ngIf="imagePreview && imagePreview !== '' && form.get('image').valid ">
+          <img [src]="imagePreview" [alt]="'form.value.title'">
+        </div>
+
+        <br>
+        <br>
+
+        <button *ngIf="mode === 'create'" mat-raised-button type="submit" color="warn">Report Issue</button>
+        <button *ngIf="mode === 'edit'" mat-raised-button type="submit" color="warn">Update Issue</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</section>
+<div class="two-space"></div>

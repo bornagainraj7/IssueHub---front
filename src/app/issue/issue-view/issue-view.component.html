@@ -1,0 +1,152 @@
+<section *ngIf="currentIssue">
+  <mat-card color="accent" fxLayoutAlign="space-between">
+    <h4 class="slim-heading">{{currentIssue.title}}</h4>
+    <button mat-stroked-button color="primary" [disabled]="userOnWatchList" (click)="onClickWatch()">Add yourself to watchlist</button>
+  </mat-card>
+  <div class="two-space"></div>
+  <div fxLayoutAlign="center center" class="issue-image" *ngIf="currentIssue.imagePath">
+    <img  fxFlex="80%" fxFlex.lt-sm="100%" [src]="currentIssue.imagePath" [alt]="currentIssue.title">
+  </div>
+  <div class="space"></div>
+
+  <div fxLayoutAlign="center">
+    <mat-accordion multi="true" fxFlex.lt-sm="90%" fxFlex="75%">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Description</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div [innerHTML]="currentIssue.description">
+        </div>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Created By: </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="slim-heading">
+          {{currentIssue.creatorName}}
+        </div>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Created On: </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="slim-heading">
+          {{currentIssue.createdOn | date}}
+        </div>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel >
+        <mat-expansion-panel-header>
+          <mat-panel-title>Assigned To: </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-list role="list" *ngIf="allAssignees">
+          <mat-list-item *ngFor="let assignee of allAssignees" fxLayoutAlign="space-between">
+            <p matLine>{{assignee.assignedToName}} (userId: {{assignee.assignedToId}})</p>
+            <button matTooltip="remove assignee" (click)="onRemoveAssignee(assignee.assignId)" mat-icon-button color="warn">
+              <mat-icon matSuffix>delete</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+        <mat-list *ngIf="!allAssignees">
+          No user is assigned to this issue, feel free to assign this issue to a user.
+        </mat-list>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Assign this issue to another users:</mat-panel-title>
+        </mat-expansion-panel-header>
+        <form (submit)="onAddAssignee(addAssigneeForm)" ngForm #addAssigneeForm="ngForm">
+          <mat-form-field>
+            <mat-select #assignedUser name="assignedUser" ngModel placeholder="Assign to: ">
+              <mat-option *ngFor="let user of allUsers" [value]="user.userId">
+                {{ user.fullName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-raised-button type="submit" color="accent">Add User</button>
+        </form>
+      </mat-expansion-panel>
+
+      <!-- <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Assign this issue to a user:
+        </mat-expansion-panel-header>
+        <div >
+          <form (submit)="onAddAssignee(addAssigneeForm)" ngForm #addAssigneeForm="ngForm">
+
+              <mat-form-field>
+                <mat-select #assignedUser name="assignedUser" ngModel placeholder="Assign to: ">
+                  <div *ngFor="let assignee of allAssignees">
+                  <mat-option *ngFor="let user of allUsers[assignee]" [value]="user.userId" [disabled]="assignee.assignedToId === user.userId">
+                      {{user.fullName }}
+                  </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            <button mat-raised-button type="submit" color="accent">Add User</button>
+          </form>
+        </div>
+      </mat-expansion-panel> -->
+
+      <mat-expansion-panel *ngIf="allWatchers">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Watchers list</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list role="list">
+          <mat-list-item *ngFor="let watcher of allWatchers">
+            <p matLine>{{watcher.userName}} (userId: {{watcher.userId}})</p>
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel *ngIf="currentIssue.modifiedOn">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Last modified On: </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="slim-heading">
+          {{currentIssue.modifiedOn | date}}
+        </div>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </div>
+
+</section>
+<div class="space"></div>
+<section>
+  <mat-card fxLayout="column" fxLayoutAlign="center">
+    <mat-card-content  fxFlex.lt-sm="100%" fxFlex="80%">
+      <form (submit)="onComment(commentForm)" ngForm #commentForm="ngForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Comment</mat-label>
+          <textarea matInput name="comment" #comment="ngModel" ngModel placeholder="Your comment" minlength="3" required></textarea>
+          <mat-error>Comment should be atleast 3 characters long.</mat-error>
+          <mat-hint align="end">{{comment.value?.length}}/3</mat-hint>
+        </mat-form-field>
+          <button type="submit" [disabled]="commentForm.invalid" mat-raised-button color="accent">
+            Add Comment
+          </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<section *ngIf="allComments">
+  <mat-card>
+    <mat-card-content>
+      <mat-list role="list" >
+        <mat-list-item *ngFor="let comment of allComments">
+          <p matLine>{{comment.comment}}</p>
+          <a type="button" *ngIf="comment.creatorId == userId" (click)="onDeleteComment(comment.commentId)" mat-icon-button color="warn">
+            <mat-icon matSuffix>delete</mat-icon>
+          </a>
+          <p matLine class="comment-caption">{{comment.creatorName}} on {{comment.createdOn | date}}</p>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</section>

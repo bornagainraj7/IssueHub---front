@@ -1,0 +1,31 @@
+<mat-toolbar color="primary" class="mat-nav-heading">
+  <div fxHide.gt-xs >
+    <button mat-icon-button (click)="onToggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <span>IssueHub</span>
+  <span class="spacer"></span>
+  <nav fxHide.xs>
+    <ul>
+      <li>
+        <a mat-button routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
+      </li>
+      <li>
+        <a mat-button routerLink="/issue/all" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">All Issues</a>
+      </li>
+      <li *ngIf="userIsAuthenticated">
+        <a mat-button routerLink="/issue/create" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Create</a>
+      </li>
+      <li *ngIf="!userIsAuthenticated">
+        <a mat-button routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Login</a>
+      </li>
+      <li *ngIf="!userIsAuthenticated">
+        <a mat-button routerLink="/signup" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">SignUp</a>
+      </li>
+      <li *ngIf="userIsAuthenticated">
+        <button mat-button (click)="onLogout()">Logout ({{userFullName}})</button>
+      </li>
+    </ul>
+  </nav>
+</mat-toolbar>

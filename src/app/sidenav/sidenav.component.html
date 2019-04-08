@@ -1,0 +1,32 @@
+<mat-nav-list>
+  <a *ngIf="!userIsAuthenticated" mat-list-item routerLink="" routerLinkActive="active" (click)="onClose()">
+    <mat-icon>home</mat-icon>
+    <span class="sidenav-caption">Home</span>
+  </a>
+  <a mat-list-item routerLink="/dashboard" routerLinkActive="active" (click)="onClose()">
+    <mat-icon>dashboard</mat-icon>
+    <span class="sidenav-caption">Dashboard</span>
+  </a>
+  <a *ngIf="userIsAuthenticated" mat-list-item routerLink="/issue/all" routerLinkActive="active" (click)="onClose()">
+    <mat-icon>list_alt</mat-icon>
+    <span class="sidenav-caption">Issue List</span>
+  </a>
+  <a *ngIf="userIsAuthenticated" mat-list-item routerLink="/issue/create" routerLinkActive="active" (click)="onClose()">
+    <mat-icon>note_add</mat-icon>
+    <span class="sidenav-caption">Create</span>
+  </a>
+  <a *ngIf="!userIsAuthenticated" mat-list-item routerLink="/login" routerLinkActive="active" (click)="onClose()">
+    <mat-icon>perm_identity</mat-icon>
+    <span class="sidenav-caption">Login</span>
+  </a>
+  <a *ngIf="!userIsAuthenticated" mat-list-item routerLink="/signup" routerLinkActive="active" (click)="onLogout()">
+    <mat-icon>person_add</mat-icon>
+    <span class="sidenav-caption">SignUp</span>
+  </a>
+  <mat-list-item *ngIf="userIsAuthenticated">
+    <button mat-icon-button (click)="onLogout()">
+      <mat-icon>eject</mat-icon>
+      <span class="sidenav-caption">Logout ({{userFullName}})</span>
+    </button>
+  </mat-list-item>
+</mat-nav-list>

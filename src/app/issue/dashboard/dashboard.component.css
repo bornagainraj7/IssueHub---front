@@ -1,0 +1,113 @@
+.first-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.second-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+}
+
+.first-line-card, .second-line-card {
+  flex-basis: auto;
+  height: 15rem;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.first-line-card h1 {
+  font-size: 6rem !important;
+  margin-bottom: 0rem;
+}
+
+.first-line-card h3 {
+  font-weight: 300;
+}
+
+.total-issue {
+  background-color: #e53935;
+}
+
+.reported {
+  background-color: #1769aa;
+}
+
+.total-users {
+  background-color: #9c27b0;
+}
+
+/* .in-backlog, .in-test, .in-progress, .done  */
+
+.second-line-card h1 {
+  font-size: 4rem !important;
+  margin-bottom: 0rem;
+}
+
+.second-line h4 {
+  font-weight: 400;
+}
+
+.done {
+  background-color: #2c387e;
+}
+
+.in-test {
+  background-color: #00897b;
+}
+
+.in-progress {
+  background-color: #26c6da;
+}
+
+.in-backlog {
+  background-color: #27632a;
+}
+
+
+@media only screen and (min-width: 320px) {
+  .first-line-card {
+    flex-basis: 85%;
+  }
+  .second-line-card {
+    flex-basis: 43%;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .first-line-card {
+    flex-basis: 60%;
+  }
+  .second-line-card {
+    flex-basis: 40%;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .first-line-card {
+    flex-basis: 33%;
+  }
+  .second-line-card {
+    flex-basis: 25%;
+  }
+}
+@media only screen and (min-width: 960px) {
+  .first-line-card {
+    flex-basis: 27%;
+  }
+  .second-line-card {
+    flex-basis: 19%;
+  }
+}
+
+@media only screen and (min-width: 1349px) {
+  .first-line-card {
+    flex-basis: 22%;
+  }
+  .second-line-card {
+    flex-basis: 17%;
+  }
+}

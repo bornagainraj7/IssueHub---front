@@ -1,0 +1,18 @@
+nav ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+nav ul a {
+  text-decoration: none;
+  color: #fff;
+}
+nav ul li {
+  display: inline-block;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+.active {
+  color: #000 !important;
+}
