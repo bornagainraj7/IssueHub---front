@@ -21,7 +21,9 @@ const routes: Routes = ([
   { path: 'issue/edit/:issueId', component: IssueCreateComponent, canActivate: [RouteGuard] },
   { path: 'issue/:issueId', component: IssueViewComponent, canActivate: [RouteGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent }
+  { path: 'signup', component: SignupComponent },
+  { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
+
 ])
 
 
