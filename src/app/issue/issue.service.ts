@@ -101,10 +101,7 @@ export class IssueService {
         this.issueUpdated.next([...this.allIssues]);
 
         this.socketService.generalSnackBar("Your issue has been reported successfully");
-
-        setTimeout(() => {
-          this.appRouter.navigate(['/issue/all']);
-        }, 2500);
+        this.appRouter.navigate(['/issue/all']);
 
 
       }, (error) => {
@@ -134,10 +131,8 @@ export class IssueService {
         this.getAllIssue();
         this.socketService.issueUpdated(id);
         this.socketService.generalSnackBar("Your issue has been reported successfully");
+        this.appRouter.navigate(['/issue/all']);
 
-        setTimeout(() => {
-          this.appRouter.navigate(['/issue/all']);
-        }, 2500);
 
       }, (error) => {
         console.log(error);

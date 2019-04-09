@@ -14,7 +14,7 @@ import { RouteGuard } from './../user/route.guard';
 
 const routes: Routes = ([
   { path: 'dashboard', component: DashboardComponent, canActivate: [RouteGuard] },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'search/:search', component: SearchComponent, canActivate: [RouteGuard] },
   { path: 'issue/all', component: IssueListComponent, canActivate: [RouteGuard] },
   { path: 'issue/create', component: IssueCreateComponent, canActivate: [RouteGuard] },

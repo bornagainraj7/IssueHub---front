@@ -167,9 +167,7 @@ export class UserService {
 
           this.socketService.generalSnackBar("Your account was created and you've logged in successfully");
 
-          setTimeout(() => {
-            this.appRouter.navigate(['/dashboard']);
-          }, 2000);
+          this.appRouter.navigate(['/dashboard']);
 
         }
       }, (error) => {
@@ -209,10 +207,8 @@ export class UserService {
           this.socketService.verifyUser(this.authToken);
 
           this.socketService.generalSnackBar("You've logged in successfully");
+          this.appRouter.navigate(['/dashboard']);
 
-          setTimeout(()=> {
-            this.appRouter.navigate(['/dashboard']);
-          }, 2000);
 
         }
 
@@ -252,10 +248,8 @@ export class UserService {
         this.socketService.verifyUser(this.authToken);
 
         this.socketService.generalSnackBar("You've logged in successfully");
+        this.appRouter.navigate(['/dashboard']);
 
-        setTimeout(() => {
-          this.appRouter.navigate(['/dashboard']);
-        }, 2000);
       }
 
     }, (error) => {
@@ -274,6 +268,7 @@ export class UserService {
         this.userId = null;
         clearTimeout(this.tokenTimer);
         this.removeAuthData();
+        this.socketService.generalSnackBar("You've logged out successfully");
         this.appRouter.navigate(['/login']);
       }, (error) => {
         console.log(error);
