@@ -10,7 +10,7 @@ import { SocketService } from './../socket.service';
 })
 export class IssueService {
 
-  public baseUrl = "http://localhost:3000/api/issue";
+  public baseUrl = "http://api.issuehub.tk/api/issue";
 
   private allIssues = [];
   private issueUpdated = new Subject<any[]>();

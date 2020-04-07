@@ -11,11 +11,11 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class SocketService {
-  private url = "http://localhost:3000";
+  private url = "http://api.issuehub.tk";
   private socket: any;
 
   constructor(public http: HttpClient, private snackBar: MatSnackBar, private appRouter: Router) {
-    this.socket = io("http://localhost:3000");
+    this.socket = io("http://api.issuehub.tk");
   }
 
   public showSnackBar(issueId: string, message: string, action: string) {

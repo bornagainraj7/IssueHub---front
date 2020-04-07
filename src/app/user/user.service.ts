@@ -12,7 +12,7 @@ import { SocketService } from './../socket.service';
 export class UserService {
 
   private authToken;
-  public baseUrl = "http://localhost:3000/api/users";
+  public baseUrl = "http://api.issuehub.tk/api/users";
   private authStatusListner = new Subject<boolean>();
   private isAuthenticated = false;
   private userId: string;
